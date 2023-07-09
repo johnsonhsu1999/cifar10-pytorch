@@ -76,7 +76,13 @@ for batch in tqdm(test_dataLoader,desc="testing"):
 print(f"accuracy : {pre.count(True)/len(pre)}")
 
 
-#test sample
+#5. save model
+torch.save(model.state_dict(),'nn/models/cifar10_model.pth')
+
+
+#6. test sample
+model = IMGMODEL(3, 10)
+model.load_state_dict(torch.load('nn/models/cifar10_model.pth'))
 img = test_data[6][0]
 ans = test_data[6][1]
 img = img.view(1,3,32,32) #input shape = (1, 3, 32, 32)
